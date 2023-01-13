@@ -1,0 +1,887 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+      "title": "API node restaurant",
+      "description": "Aplicação desenvolvida para teste prático referente a vaga de desenvolvedor backend",
+      "version": "1.0.0",
+      "contact": {
+          "email": "diegorbiazate@gmail.com"
+      }
+  },
+  "paths": {
+    "/restaurant/find": {
+      "get": {
+        "tags": ["Restaurant"],
+        "summary": "Busca por nome",
+        "description": "Neste endpoint é possível filtrar os restaurantes por um determinado nome, seja ele completo, ou uma parte do nome",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Nome do restaurante que seja buscar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "id": "string",
+                        "name": "string",
+                        "document": "string",
+                        "type": "string",
+                        "address": "string",
+                        "city": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "total": 2,
+                  "data": [
+                    {
+                      "id": "3ec97251-029b-480f-b7e3-8d2954cf5800",
+                      "name": "Restaurante Biazate 2",
+                      "document": "123456",
+                      "type": "Sorveteria",
+                      "address": "Rua João Afonso de Miranda",
+                      "city": "Cachoeiro de Itapemirim"
+                    },
+                    {
+                      "id": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "name": "Restaurante Biazate 326",
+                      "document": "123456",
+                      "type": "Sorveteria",
+                      "address": "Rua João Afonso de Miranda",
+                      "city": "Cachoeiro de Itapemirim"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/listAll": {
+      "get": {
+        "tags": ["Restaurant"],
+        "summary": "Listar todos os restaurantes",
+        "description": "Neste endpoint é possível listar todos os restaurantes cadastrados no banco de dados",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "id": "string",
+                        "name": "string",
+                        "document": "string",
+                        "type": "string",
+                        "address": "string",
+                        "city": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "total": 2,
+                  "data": [
+                    {
+                      "id": "3ec97251-029b-480f-b7e3-8d2954cf5800",
+                      "name": "Restaurante Biazate 2",
+                      "document": "123456",
+                      "type": "Sorveteria",
+                      "address": "Rua João Afonso de Miranda",
+                      "city": "Cachoeiro de Itapemirim"
+                    },
+                    {
+                      "id": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "name": "Restaurante Biazate 326",
+                      "document": "123456",
+                      "type": "Sorveteria",
+                      "address": "Rua João Afonso de Miranda",
+                      "city": "Cachoeiro de Itapemirim"
+                    }
+                  ]
+                }
+              }
+            } 
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/create": {
+      "post": {
+        "tags": ["Restaurant"],
+        "summary": "Cadastro de um novo restaurante",
+        "description": "Neste endpoint é possível realizar o cadastro de um novo restaurante",
+        "requestBody": {
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "document": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "name": "Restaurante Biazate",
+                  "document": "123456",
+                  "type": "Sorveteria",
+                  "address": "Rua João Afonso de Miranda",
+                  "city": "Cachoeiro de Itapemirim"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Cadastro criado com sucesso!"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Já existe um restaurante com este nome!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/edit": {
+      "put": {
+        "tags": ["Restaurant"],
+        "summary": "Editar cadastro de restaurante",
+        "description": "Neste endpoint é possível editar os dados de um restaurante",
+        "requestBody": {
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "document": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "id": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                  "name": "Restaurante Biazate",
+                  "document": "123456",
+                  "type": "Sorveteria",
+                  "address": "Rua João Afonso de Miranda",
+                  "city": "Cachoeiro de Itapemirim"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "id": "string",
+                        "name": "string",
+                        "document": "string",
+                        "type": "string",
+                        "address": "string",
+                        "city": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Dados alterados com sucesso!"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Favor enviar todos os dados!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/delete": {
+      "delete": {
+        "tags": ["Restaurant"],
+        "summary": "Deletar restaurante",
+        "description": "Neste endpoint é possível deletar um restaurante no banco de dados",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do restaurante que deseja deletar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "id": "string",
+                        "name": "string",
+                        "document": "string",
+                        "type": "string",
+                        "address": "string",
+                        "city": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Restaurante deletado com sucesso!"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Favor informar o id do restaurante que deseja excluir!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openingHours/list":{
+      "get": {
+        "tags": ["OpeningHours"],
+        "summary": "Listar todos os horários cadastrados no banco.",
+        "description": "Neste endpoint é possível listar todos os horários de funcionamento de todos os estabelecimentos.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "id": "string",
+                        "id_restaurant": "string",
+                        "weekday": "string",
+                        "opening_time": "string",
+                        "closing_time": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "total": 2,
+                  "data": [
+                    {
+                      "id": "3cc7d82b-7984-4103-b746-a5eccd499ece",
+                      "id_restaurant": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "weekday": 1,
+                      "opening_time": "18:00",
+                      "closing_time": "22:00"
+                    },
+                    {
+                      "id": "5a283dc4-70c9-4bc7-b171-a8baebd6b3ee",
+                      "id_restaurant": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "weekday": 1,
+                      "opening_time": "08:00",
+                      "closing_time": "15:00"
+                    }
+                  ]
+                }
+              }
+            } 
+          }
+        }
+      }
+    },
+    "/openingHours/findByIdRestaurant":{
+      "get": {
+        "tags": ["OpeningHours"],
+        "summary": "Listar o horário de funcionamento de um estabelecimento específico.",
+        "description": "Neste endpoint é possível listar o horário de funcionamento de um estabelecimentos específico.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id_restaurant",
+            "in": "query",
+            "description": "ID do restaurante que deseja buscar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "openingHours": {
+                        "id": "string",
+                        "id_restaurant": "string",
+                        "weekday": "string",
+                        "opening_time": "string",
+                        "closing_time": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "openingHours": [
+                    {
+                      "id": "3cc7d82b-7984-4103-b746-a5eccd499ece",
+                      "id_restaurant": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "weekday": 1,
+                      "opening_time": "18:00",
+                      "closing_time": "22:00"
+                    },
+                    {
+                      "id": "5a283dc4-70c9-4bc7-b171-a8baebd6b3ee",
+                      "id_restaurant": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "weekday": 1,
+                      "opening_time": "08:00",
+                      "closing_time": "15:00"
+                    }
+                  ]
+                }
+              }
+            } 
+          },
+          "204":{
+            "description": "Not Content" 
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": false,
+                      "message": "ID Restaurante não enviado!"
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "ID Restaurante não enviado!"
+                }
+              }
+            } 
+          }
+        }
+      }
+    },
+    "/openingHours/isOpen":{
+      "get": {
+        "tags": ["OpeningHours"],
+        "summary": "Listar o horário de funcionamento de um estabelecimento específico.",
+        "description": "Neste endpoint é possível listar o horário de funcionamento de um estabelecimentos específico. Este endpoint aceita filtros como id_restaurant, e date_time, mas caso não seja enviado nenhum dado, ele listará no dia atual, todos os restaurantes que tiverem abertos/fechados. Mas atenção, caso não haja nenhum horário de funcionamento para o restaurante, para o dia em questão, retornará um array vazio.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id_restaurant",
+            "in": "query",
+            "description": "ID do restaurante que deseja buscar",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date_time",
+            "in": "query",
+            "description": "Data e Hora que deseja buscar. Ex.: 2023-01-09 23:00 (YYYY-MM-DD HH:MM)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "id_restaurant": "string",
+                        "isOpen": "boolean"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "data": [
+                    {
+                      "id_restaurant": "a9fb4e1d-b47a-4f1c-b13a-49829cf45f02",
+                      "isOpen": false
+                    },
+                    {
+                      "id_restaurant": "6bba4a8c-8ed0-4883-a41e-883d2f46edda",
+                      "isOpen": false
+                    }
+                  ]
+                }
+              }
+            } 
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": false,
+                      "message": "Formato de data inválido. Formato: YYYY-MM-DD HH:00"
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Formato de data inválido. Formato: YYYY-MM-DD HH:00"
+                }
+              }
+            } 
+          }
+        }
+      }
+    },
+    "/openingHours/create":{
+      "post": {
+        "tags": ["OpeningHours"],
+        "summary": "Cadastrar um novo horário de funcionamento.",
+        "description": "Neste endpoint é possível cadastrar um novo horário de funcionamento para um estabelecimento. Importante se atentar formato dos dados a serem enviados, como o 'weekday', permite valores entre 1 e 7, e o horário de abertura e fechamento, o formato é HH:MM, exemplo: 08:00",
+        "requestBody": {
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "id_restaurant": {
+                    "type": "string"
+                  },
+                  "weekday": {
+                    "type": "number"
+                  },
+                  "opening_time": {
+                    "type": "string"
+                  },
+                  "closing_time": {
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "id_restaurant": "a9fb4e1d-b47a-4f1c-b13a-49829cf45f02",
+                  "weekday": 4,
+                  "opening_time": "08:00",
+                  "closing_time": "15:00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": true,
+                      "message": "Horário de funcionamento registrado com sucesso!"
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Horário de funcionamento registrado com sucesso!"
+                }
+              }
+            } 
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": false,
+                      "message": "Horário de funcionamento e dia já registrados"
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Horário de funcionamento e dia já registrados"
+                }
+              }
+            } 
+          }
+        }
+      }
+    },
+    "/openingHours/edit":{
+      "put": {
+        "tags": ["OpeningHours"],
+        "summary": "Editar horário de funcionamento.",
+        "description": "Neste endpoint é possível editar um horário de funcionamento de um estabelecimento. Importante se atentar formato dos dados a serem enviados, como o 'weekday', permite valores entre 1 e 7, e o horário de abertura e fechamento, o formato é HH:MM, exemplo: 08:00",
+        "requestBody": {
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "id":{
+                    "type": "string"
+                  },
+                  "id_restaurant": {
+                    "type": "string"
+                  },
+                  "weekday": {
+                    "type": "number"
+                  },
+                  "opening_time": {
+                    "type": "string"
+                  },
+                  "closing_time": {
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "id": "3cc7d82b-7984-4103-b746-a5eccd499ece",
+                  "id_restaurant": "a9fb4e1d-b47a-4f1c-b13a-49829cf45f02",
+                  "weekday": 4,
+                  "opening_time": "08:00",
+                  "closing_time": "15:00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": true,
+                      "message": "Horário alterado com sucesso!"
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Horário alterado com sucesso!"
+                }
+              }
+            } 
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": false,
+                      "message": "Registro não localizado!"
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Registro não localizado!"
+                }
+              }
+            } 
+          }
+        }
+      }
+    },
+    "/openingHours/delete":{
+      "delete":{
+        "tags": ["OpeningHours"],
+        "summary": "Deletar horário de funcionamento",
+        "description": "Neste endpoint é possível deletar um horário de funcionamento",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do horário que deseja deletar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": true,
+                      "message": "Registro deletado com sucesso!"
+                    }
+                  }
+                },
+                "example":{
+                  "success": true,
+                  "message": "Registro deletado com sucesso!"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Failed",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "success": false,
+                  "message": "Registro não encontrado!"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

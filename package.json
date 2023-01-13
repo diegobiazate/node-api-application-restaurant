@@ -1,0 +1,38 @@
+{
+  "name": "api-application-restaurant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start-dev": "nodemon -e ts,json src/server.ts"
+  },
+  "keywords": [],
+  "author": "Diego Rodrigues Biazate",
+  "license": "ISC",
+  "dependencies": {
+    "@types/swagger-jsdoc": "^6.0.1",
+    "aws-sdk": "^2.1294.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0",
+    "swagger-jsdoc": "^6.2.7",
+    "swagger-ui-express": "^4.6.0",
+    "uuid": "^9.0.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/node": "^18.11.18",
+    "@types/sequelize": "^4.28.14",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@types/uuid": "^8.3.4",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1",
+    "typescript": "^4.9.4"
+  }
+}
