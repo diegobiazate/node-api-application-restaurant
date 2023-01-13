@@ -12,7 +12,7 @@ export const sequelize = new Sequelize(
     {
         dialect: 'mysql',
         port: parseInt(process.env.DB_PORT as string),
-        host: 'mysql',
+        host: 'localhost',
         logging: false,
         pool: {
             max: 5,
