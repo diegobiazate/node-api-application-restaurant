@@ -6,11 +6,19 @@ dotenv.config();
 
 //criando a conexão com o banco, pegando as informaçõe das variáveis de ambiente
 export const sequelize = new Sequelize(
-    process.env.MYSQL_DB as string,
-    process.env.MYSQL_USER as string,
-    process.env.MYSQL_PASSWORD as string,
+    process.env.DB_NAME as string,
+    process.env.DB_USER as string,
+    process.env.DB_PASSWORD as string,
     {
         dialect: 'mysql',
-        port: parseInt(process.env.MYSQL_PORT as string)
+        port: parseInt(process.env.DB_PORT as string),
+        host: 'mysql',
+        logging: false,
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        },
     }
 );

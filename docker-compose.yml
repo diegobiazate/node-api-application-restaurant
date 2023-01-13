@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: mysqldb
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456
+            - MYSQL_DATABASE=db_restaurants
+        volumes:
+            - "./.mysql-data/db:/var/lib/mysql"
+        networks:
+            - app-network
+    app:
+        build: .
+        container_name: application-restaurant
+        depends_on:
+            - mysql
+        ports:
+            - 4000:4000
+        environment:
+            - NODE_ENV=production
+            - PORT=4000
+            - DB_HOST=mysql
+            - DB_NAME=db_restaurants
+            - DB_USER=root
+            - DB_PASSWORD=123456
+            - DB_PORT=3306
+        volumes:
+            - .:/usr/src/app
+        networks:
+            - app-network
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    db_data: {}
