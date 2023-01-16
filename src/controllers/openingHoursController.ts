@@ -163,7 +163,8 @@ export const isOpen = async (req: Request, res: Response) => {
       let hours = dataTime.getHours();
       let minutes = dataTime.getMinutes();
       let data: ResponseIsOpen[] = [];
-      let uniData = [];
+      
+      //console.log(minutes)
 
       if(id_restaurant){
         const openingHours = await OpeningHours.findAll({
@@ -176,7 +177,9 @@ export const isOpen = async (req: Request, res: Response) => {
           if(item.weekday == weekday){
             let openHourItem = item.opening_time.split(":");
             let closeHourItem = item.closing_time.split(":");
-            if(hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])){
+            //console.log(parseInt(closeHourItem[1]))
+            if((hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])) && 
+            (minutes >= parseInt(openHourItem[1]) && minutes <= parseInt(closeHourItem[1]))){
               data = [{
                 id_restaurant: item.id_restaurant,
                 isOpen: true
@@ -211,7 +214,8 @@ export const isOpen = async (req: Request, res: Response) => {
           if(item.weekday == weekday){
             let openHourItem = item.opening_time.split(":");
             let closeHourItem = item.closing_time.split(":");
-            if(hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])){
+            if((hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])) && 
+            (minutes >= parseInt(openHourItem[1]) && minutes <= parseInt(closeHourItem[1]))){
               if(data.find(e => e.id_restaurant === item.id_restaurant && e.isOpen === false)){
                 data.map(element => {
                   if(element.id_restaurant === item.id_restaurant && element.isOpen === false){
@@ -243,15 +247,9 @@ export const isOpen = async (req: Request, res: Response) => {
             }
           }
         })
-
-        // data.forEach(element => {
-        //   if(!uniData.includes(element.)){
-        //     uniData.push(element)
-        //   }
-        // })
         
       }
-      res.json({ data, uniData });
+      res.json({ data });
     }
   }else{
     const dataTime = new Date();
@@ -272,7 +270,8 @@ export const isOpen = async (req: Request, res: Response) => {
         if(item.weekday == weekday){
           let openHourItem = item.opening_time.split(":");
           let closeHourItem = item.closing_time.split(":");
-          if(hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])){
+          if((hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])) && 
+          (minutes >= parseInt(openHourItem[1]) && minutes <= parseInt(closeHourItem[1]))){
             data = [{
               id_restaurant: item.id_restaurant,
               isOpen: true
@@ -306,7 +305,8 @@ export const isOpen = async (req: Request, res: Response) => {
         if(item.weekday == weekday){
           let openHourItem = item.opening_time.split(":");
           let closeHourItem = item.closing_time.split(":");
-          if(hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])){
+          if((hours >= parseInt(openHourItem[0]) && hours <= parseInt(closeHourItem[0])) && 
+            (minutes >= parseInt(openHourItem[1]) && minutes <= parseInt(closeHourItem[1]))){
             if(data.find(e => e.id_restaurant === item.id_restaurant && e.isOpen === false)){
               data.map(element => {
                 if(element.id_restaurant === item.id_restaurant && element.isOpen === false){
