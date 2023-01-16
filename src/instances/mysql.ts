@@ -11,8 +11,8 @@ export const sequelize = new Sequelize(
     process.env.DB_PASSWORD as string,
     {
         dialect: 'mysql',
-        port: 58320,
-        host: '15.229.66.47',
+        port: parseInt(process.env.DB_PORT as string),
+        host: 'localhost',
         logging: false,
         pool: {
             max: 5,
