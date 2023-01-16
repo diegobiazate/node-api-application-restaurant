@@ -1,8 +1,3 @@
-## Link da Documentação
-
-http://ec2-15-229-66-47.sa-east-1.compute.amazonaws.com:4000/api-docs/
-
-
 ## Recursos da API
 
 ### /restaurant
